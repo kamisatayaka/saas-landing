@@ -65,11 +65,25 @@ export default function Auth({ onDone, onBack }) {
         })
         if (error) throw error
 
-        // Standard SaaS flow: email confirmation is required (supabase default).
-        // Prompt the user to check their inbox, then switch to login.
+        // Best-effort auto-login: if email confirmation is disabled (recommended
+        // for a fast demo/product), this succeeds and the user lands in the app.
+        // If confirmation is required, it fails gracefully and we prompt instead.
+        const { error: loginError } = await supabase.auth.signInWithPassword({
+          email: fields.email,
+          password: fields.password,
+        })
+
+        if (!loginError) {
+          onDone()
+          return
+        }
+
+        const needsConfirm = (loginError?.message || '').toLowerCase().includes('confirm')
         setMessage({
           type: 'success',
-          text: 'Account created! Check your email to confirm, then log in.',
+          text: needsConfirm
+            ? 'Account created! Check your email to confirm, then log in.'
+            : `Account created! ${loginError?.message || ''}`.trim(),
         })
         setMode(MODES.login)
       } else if (mode === MODES.forgot) {
