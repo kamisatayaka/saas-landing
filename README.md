@@ -2,6 +2,10 @@
 
 A polished, conversion-focused marketing landing page for **CopyCraft AI**, a fictional AI marketing-copywriting SaaS. Built as a portfolio/showcase project in **React + Vite**.
 
+## 🚀 Live demo
+
+**https://saas-landing-mauve-nine.vercel.app/**
+
 ## Sections included
 
 - Sticky navbar with brand logo
