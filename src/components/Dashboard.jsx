@@ -21,6 +21,21 @@ export default function Dashboard({ user, onLogout }) {
   const email = user?.email || 'you@example.com'
   const initial = (email[0] || 'U').toUpperCase()
 
+  // Local copy-generation history (kept in state; could be persisted later).
+  const [history, setHistory] = useState([])
+  const [copied, setCopied] = useState(false)
+
+  const addHistory = (item) => {
+    setHistory((prev) => [
+      { id: Date.now(), brief, tone, copy: item },
+      ...prev,
+    ].slice(0, 10))
+  }
+
+  const removeHistory = (id) => {
+    setHistory((prev) => prev.filter((h) => h.id !== id))
+  }
+
   // Call the Vercel serverless function (/api/generate) which uses DeepSeek.
   const handleGenerate = async () => {
     if (!brief.trim()) return
@@ -36,6 +51,7 @@ export default function Dashboard({ user, onLogout }) {
       const data = await resp.json()
       if (!resp.ok) throw new Error(data?.error || 'Generation failed.')
       setCopy(data)
+      addHistory(data)
     } catch (e) {
       console.error(e)
       setError(e?.message || 'Could not generate copy. Please try again.')
@@ -160,12 +176,16 @@ export default function Dashboard({ user, onLogout }) {
                 </div>
                 <div className="dash-copy-actions">
                   <button
-                    className="btn btn-outline"
-                    onClick={() => navigator.clipboard?.writeText(
-                      `${copy.headline}\n\n${copy.subhead}\n\n${copy.bullet1}\n${copy.bullet2}\n\n${copy.cta}`,
-                    )}
+                    className={`btn btn-outline ${copied ? 'copied' : ''}`}
+                    onClick={() => {
+                      navigator.clipboard?.writeText(
+                        `${copy.headline}\n\n${copy.subhead}\n\n${copy.bullet1}\n${copy.bullet2}\n\n${copy.cta}`,
+                      )
+                      setCopied(true)
+                      setTimeout(() => setCopied(false), 1600)
+                    }}
                   >
-                    Copy all
+                    {copied ? 'Copied!' : 'Copy all'}
                   </button>
                   <button className="btn btn-outline" onClick={handleGenerate}>
                     Regenerate
@@ -180,10 +200,30 @@ export default function Dashboard({ user, onLogout }) {
             )}
           </section>
         </div>
+
+        {history.length > 0 && (
+          <div className="dash-history">
+            <h3>Recent generations</h3>
+            <div className="dash-history-list">
+              {history.map((h) => (
+                <div className="dash-history-item" key={h.id}>
+                  <span>{h.copy.headline || h.copy.subhead || h.brief}</span>
+                  <button
+                    className="dash-history-delete"
+                    onClick={() => removeHistory(h.id)}
+                    aria-label="Delete"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
 
       <footer className="dash-footer">
-        <span>© 2025 CopyCraft AI. Demo workspace — content is generated locally.</span>
+        <span>© 2025 CopyCraft AI. Copy is generated live by AI.</span>
       </footer>
     </div>
   )

@@ -306,6 +306,72 @@ export default function Landing({ onLogin, onStart }) {
         </div>
       </section>
 
+      {/* ================= STATS ================= */}
+      <section className="section stats-section">
+        <div className="container">
+          <div className="stats-grid">
+            <div className="stat">
+              <span className="stat-value">12k+</span>
+              <span className="stat-label">Marketers</span>
+            </div>
+            <div className="stat">
+              <span className="stat-value">2.4M</span>
+              <span className="stat-label">Pieces generated</span>
+            </div>
+            <div className="stat">
+              <span className="stat-value">34%</span>
+              <span className="stat-label">Avg. conversion lift</span>
+            </div>
+            <div className="stat">
+              <span className="stat-value">4.9★</span>
+              <span className="stat-label">User rating</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= AI DEMO PREVIEW ================= */}
+      <section className="section alt ai-demo-section">
+        <div className="container">
+          <div className="ai-demo">
+            <div className="ai-demo-copy">
+              <p className="eyebrow">See it in action</p>
+              <h2 className="section-title">A live glimpse of CopyCraft.</h2>
+              <p className="ai-demo-desc">
+                Type an idea, pick a tone, and watch CopyCraft draft headline, subhead,
+                body, and CTA in seconds — powered by real AI.
+              </p>
+              <div className="ai-demo-features">
+                <span className="chip">Landing pages</span>
+                <span className="chip">Emails</span>
+                <span className="chip">Ad copy</span>
+                <span className="chip">Social posts</span>
+              </div>
+            </div>
+            <div className="ai-demo-window" aria-hidden="true">
+              <div className="ai-demo-bar">
+                <span className="ai-demo-dot" />
+                <span className="ai-demo-url">app.copycraft.ai/write</span>
+              </div>
+              <div className="ai-demo-body">
+                <div className="ai-demo-input-label">Brief</div>
+                <div className="ai-demo-input" />
+                <div className="ai-demo-input short" />
+                <div className="ai-demo-generate">✨ Generate copy</div>
+                <div className="ai-demo-result">
+                  <div className="ai-demo-result-label">Output</div>
+                  <div className="ai-demo-headline">
+                    Ship your idea. Copy that sells.
+                  </div>
+                  <div className="ai-demo-line" />
+                  <div className="ai-demo-line short" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ================= PRICING ================= */}
       <section id="pricing" className="section alt">
         <div className="container">
