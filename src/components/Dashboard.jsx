@@ -11,50 +11,37 @@ const productExamples = [
   'A workout program for busy professionals.',
 ]
 
-// A small client-side "AI" generator so the demo works without a real LLM key.
-function generateCopy(brief, tone) {
-  const title = keyTitle(brief)
-  const sub = `${tone} copy for ${brief}`
-  return {
-    headline: title,
-    subhead: `The fastest way to ${lowerStart(brief)}`,
-    bullet1: `Need more ${lowerStart(brief)}? We're built for it — get started in minutes.`,
-    bullet2: `Trusted by thousands. ${title} makes ${lowerStart(brief)} effortless.`,
-    cta: `Try ${title} free`,
-  }
-}
-
-function keyTitle(text) {
-  const clean = text.replace(/[.]$/, '').trim()
-  const words = clean.split(/\s+/).slice(0, 5)
-  return words
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ')
-}
-
-function lowerStart(text) {
-  let t = text.replace(/[.]$/, '').trim()
-  t = t.charAt(0).toLowerCase() + t.slice(1)
-  return t.replace(/\.$/, '')
-}
-
 export default function Dashboard({ user, onLogout }) {
   const [brief, setBrief] = useState(productExamples[0])
   const [tone, setTone] = useState('Friendly')
   const [generating, setGenerating] = useState(false)
   const [copy, setCopy] = useState(null)
+  const [error, setError] = useState(null)
 
   const email = user?.email || 'you@example.com'
   const initial = (email[0] || 'U').toUpperCase()
 
-  const handleGenerate = () => {
+  // Call the Vercel serverless function (/api/generate) which uses DeepSeek.
+  const handleGenerate = async () => {
+    if (!brief.trim()) return
     setGenerating(true)
     setCopy(null)
-    // Fake network latency for a realistic feel.
-    setTimeout(() => {
-      setCopy(generateCopy(brief, tone))
+    setError(null)
+    try {
+      const resp = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ brief, tone }),
+      })
+      const data = await resp.json()
+      if (!resp.ok) throw new Error(data?.error || 'Generation failed.')
+      setCopy(data)
+    } catch (e) {
+      console.error(e)
+      setError(e?.message || 'Could not generate copy. Please try again.')
+    } finally {
       setGenerating(false)
-    }, 700)
+    }
   }
 
   useEffect(() => {
@@ -147,6 +134,11 @@ export default function Dashboard({ user, onLogout }) {
                 <span className="spinner" aria-hidden="true" />
                 <p>Drafting your copy…</p>
               </div>
+            ) : error ? (
+              <div className="dash-empty">
+                <p className="dash-error">{error}</p>
+                <p className="dash-empty-hint">Check the connection and try again.</p>
+              </div>
             ) : copy ? (
               <div className="dash-copy">
                 <div className="dash-copy-block">
@@ -175,7 +167,7 @@ export default function Dashboard({ user, onLogout }) {
                   >
                     Copy all
                   </button>
-                  <button className="btn btn-outline" onClick={() => setCopy(generateCopy(brief, tone))}>
+                  <button className="btn btn-outline" onClick={handleGenerate}>
                     Regenerate
                   </button>
                 </div>
