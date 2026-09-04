@@ -1,70 +1,55 @@
-# Portfolio Introduction
+# Portfolio · CopyCraft AI
 
-## 一句话简介
-
-A full-stack AI SaaS (CopyCraft AI) that I designed, built, and deployed from scratch — a marketing copywriting tool with a polished landing page, real user authentication, and AI-powered copy generation.
+> A full-stack AI SaaS I designed, built, and shipped end-to-end — from idea to a live, deployed product with real auth and real AI.
 
 ---
 
-## 英文版（适合 Upwork / Fiverr / LinkedIn / 海外接单）
+## EN — For Upwork / Fiverr / LinkedIn / overseas clients
 
-I build clean, conversion-focused SaaS products. Here's a project I designed, developed, and shipped end-to-end:
+**I build and ship complete SaaS products — not mockups.**
 
-**CopyCraft AI** — an AI marketing copywriting SaaS.
+A project I took from an idea to a deployed product:
 
-Live: https://saas-landing-mauve-nine.vercel.app/
+### CopyCraft AI — AI marketing copy generator
 
-**What it does:**
-- A complete, responsive SaaS marketing landing page
-- Real user sign-up / log-in / password reset (built on Supabase Auth)
-- A post-login dashboard with an AI copy generator
-- Users describe their product + pick a tone, and get on-brand marketing copy (headline, subhead, body, CTA) generated live via the DeepSeek API
+**🔗 Live demo: https://saas-landing-mauve-nine.vercel.app/**
 
-**Tech stack:**
-- React 19 + Vite
-- Supabase (Auth + database)
-- Vercel (hosting + serverless functions)
-- DeepSeek API (AI copy generation)
-- Pure CSS design system, fully responsive
+**What it does:** A user describes their product and picks a tone, and CopyCraft generates on-brand marketing copy (headline, subhead, body, CTA) in seconds — powered by a real AI. It's a complete product with a conversion-focused landing page, real authentication, and a member dashboard.
 
-**What this shows clients:**
-- I can take a product from idea to a deployed, working web app
-- Real authentication, not a static mockup
-- Integrated a real AI API behind a serverless backend (API keys kept secure)
-- Clean, modern UI that converts
+**What's inside:**
+- Conversion-focused, fully responsive SaaS landing page
+- Real user sign-up / log-in / password reset (Supabase Auth) — not a static mockup
+- Member dashboard with a live AI copy generator
+- AI generation via the DeepSeek API, routed through a secure Vercel serverless function so the API key never ships to the browser
+
+**Stack:** React 19 · Vite · Supabase (auth) · Vercel (host + serverless) · DeepSeek API · custom CSS design system
+
+**Why this matters to you (the client):**
+- I don't hand you a Figma file or a design — I hand you a **working product** you can click through and register on yourself.
+- I've shipped the exact thing you're trying to build, so I don't need hand-holding on auth, deployment, or AI integration.
+- I keep secrets safe (AI keys server-side) and ship fast, with a live preview URL from day one.
+
+> "You describe it — I build and deploy it."
 
 ---
 
-## 中文版（适合国内简历 / 作品集展示）
+## 中 — 国内简历 / 作品集
 
-**CopyCraft AI —— 一个完整的 AI SaaS 产品**
+**CopyCraft AI — 一个完整的 AI SaaS 产品**
 
-我独立设计、开发并上线了一款完整的 SaaS 产品：一个 AI 营销文案生成工具。
+我从零独立设计、开发并上线了一款完整的 SaaS 产品：AI 营销文案生成工具。
 
-线上地址：https://saas-landing-mauve-nine.vercel.app/
+**🔗 线上演示：https://saas-landing-mauve-nine.vercel.app/**
 
 **产品功能：**
 - 完整的响应式 SaaS 落地页
-- 真实的用户注册 / 登录 / 找回密码（基于 Supabase Auth）
-- 登录后的工作台，内置 AI 文案生成器
-- 用户输入产品描述 + 选择语气，即可实时生成专业营销文案（标题、副标题、正文、CTA），由 DeepSeek API 驱动
+- 真实用户注册 / 登录 / 找回密码（Supabase Auth），非静态原型
+- 登录后工作台，内置 AI 文案生成器
+- 用户输入产品描述、选择语气，实时生成标题/副标题/正文/CTA 营销文案，由 DeepSeek API 驱动
 
-**技术栈：**
-- React 19 + Vite
-- Supabase（认证 + 数据库）
-- Vercel（托管 + Serverless 函数）
-- DeepSeek API（AI 文案生成）
-- 纯 CSS 设计系统，完全响应式
+**技术栈：** React 19 · Vite · Supabase · Vercel · DeepSeek API · 原生 CSS 设计系统
 
-**能向客户展示的能力：**
-- 能把一个想法从零做成可部署、可用的 Web 应用
-- 真实的用户认证系统，而非静态原型
-- 在后端安全地集成了真实 AI API（密钥不暴露在前端）
-- 现代、美观、能转化的 UI
-
----
-
-## 接单时的一句话卖点（Bilingual）
-
-EN: "I ship complete SaaS products — landing page, real auth, and AI features — you describe it, I build and deploy it."
-CN: "我能交付完整的 SaaS 产品——落地页、真实认证、AI 功能，你描述需求，我负责开发并上线。"
+**能力证明：**
+- 能把想法从零做成可部署、可用的 Web 应用
+- 真实认证系统 + 后端安全集成 AI（密钥不暴露前端）
+- 快速交付线上可用产品，第一天就有可预览的网址
